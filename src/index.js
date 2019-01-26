@@ -21,6 +21,9 @@ class Board extends React.Component {
 
   handleClick(i){
     const squares = this.state.squares.slice(); 
+    if (calculateWinner(squares) || squares[i]){
+      return;
+    }
     //NOTE: .slice() creates copy of squares array to modify instead of modifying the existing one
     squares[i] = this.state.xIsNext? 'X' : 'O';
     this.setState({
@@ -69,6 +72,7 @@ class Board extends React.Component {
   }
 }
 
+//helper function to calculate winner
 function calculateWinner(squares){
   const lines = [
     [0, 1, 2],
